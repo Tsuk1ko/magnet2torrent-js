@@ -1,0 +1,29 @@
+{
+  "name": "magnet2torrent-js",
+  "version": "1.0.0",
+  "description": "Convert magnet to torrent (independent of third-party services)",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tsuk1ko/magnet2torrent-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Tsuk1ko/magnet2torrent-js/issues"
+  },
+  "homepage": "https://github.com/Tsuk1ko/magnet2torrent-js#readme",
+  "keywords": [
+    "magnet",
+    "torrent",
+    "convert"
+  ],
+  "author": "Jindai Kirin",
+  "license": "MIT",
+  "dependencies": {
+    "memory-chunk-store": "^1.3.0",
+    "parse-torrent": "^6.1.2",
+    "torrent-stream": "^1.1.0"
+  }
+}
