@@ -1,6 +1,6 @@
 # magnet2torrent
 
-This module uses [torrent-stream](https://www.npmjs.com/package/torrent-stream) to download metadata of magnet links only.
+This module uses [torrent-stream](https://www.npmjs.com/package/torrent-stream) to download metadata of magnet links only, without creating any temp file.
 
 ## Example
 
@@ -55,7 +55,7 @@ const trackers = [
 // ubuntu-16.04.1-server-amd64.iso
 const magnet = 'magnet:?xt=urn:btih:90289fd34dfc1cf8f316a268add8354c85334458';
 
-let m2t = new Magnet2torrent(trackers);
+let m2t = new Magnet2torrent(trackers, true);
 
 m2t.getTorrentBuffer(magnet).then(buffer => {
     let wstream = Fs.createWriteStream('test.torrent');
