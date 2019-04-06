@@ -1,6 +1,6 @@
 {
   "name": "magnet2torrent-js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Convert magnet to torrent (independent of third-party services)",
   "main": "index.js",
   "scripts": {
