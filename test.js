@@ -28,7 +28,10 @@ const trackers = [
 // ubuntu-16.04.1-server-amd64.iso
 const magnet = 'magnet:?xt=urn:btih:90289fd34dfc1cf8f316a268add8354c85334458';
 
-let m2t = new Magnet2torrent(trackers, true);
+let m2t = new Magnet2torrent({
+	trackers,
+	addTrackersToTorrent: true
+});
 
 m2t.getTorrentBuffer(magnet).then(buffer => {
 	let wstream = Fs.createWriteStream('test.torrent');
