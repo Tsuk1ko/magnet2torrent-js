@@ -34,7 +34,5 @@ let m2t = new Magnet2torrent({
 });
 
 m2t.getTorrentBuffer(magnet).then(buffer => {
-	let wstream = Fs.createWriteStream('test.torrent');
-	wstream.write(buffer);
-	wstream.end();
+	Fs.writeFileSync('test.torrent', buffer);
 });

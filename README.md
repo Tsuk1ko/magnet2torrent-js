@@ -40,9 +40,7 @@ const magnet = 'magnet:?xt=urn:btih:90289fd34dfc1cf8f316a268add8354c85334458';
 let m2t = new Magnet2torrent();
 
 m2t.getTorrentBuffer(magnet).then(buffer => {
-    let wstream = Fs.createWriteStream('test.torrent');
-    wstream.write(buffer);
-    wstream.end();
+    Fs.writeFileSync('test.torrent', buffer);
 });
 ```
 
@@ -71,8 +69,6 @@ let m2t = new Magnet2torrent({
 });
 
 m2t.getTorrentBuffer(magnet).then(buffer => {
-    let wstream = Fs.createWriteStream('test.torrent');
-    wstream.write(buffer);
-    wstream.end();
+    Fs.writeFileSync('test.torrent', buffer);
 });
 ```
