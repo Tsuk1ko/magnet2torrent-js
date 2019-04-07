@@ -10,7 +10,6 @@
 		"bncode": "^0.5.2",
 		"buffer-from": "^1.0.0",
 		"hat": "0.0.3",
-		"ip-set": "^1.0.0",
 		"parse-torrent": "^4.0.0",
 		"peer-wire-swarm": "^0.12.0",
 		"torrent-discovery": "^5.2.0",

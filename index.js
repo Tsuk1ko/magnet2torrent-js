@@ -1,8 +1,6 @@
 const TorrentStream = require('torrent-stream');
 const ParseTorrent = require('parse-torrent');
 
-const DEFAULT_PORT = 6881;
-
 /**
  * Convert magnet to torrent buffer
  *
@@ -18,12 +16,10 @@ class Magnet2torrent {
 		let {
 			trackers,
 			addTrackersToTorrent,
-			port
 		} = options;
 
 		this.trackers = trackers || [];
 		this.attt = addTrackersToTorrent ? true : false;
-		this.port = port || DEFAULT_PORT;
 
 		if (!Array.isArray(this.trackers))
 			throw new TypeError('announceList must be an array');
@@ -44,17 +40,13 @@ class Magnet2torrent {
 	getTorrentBuffer(magnet) {
 		return new Promise(resolve => {
 			const engine = TorrentStream(magnet, {
-				trackers: this.trackers,
-				port: this.port
+				trackers: this.trackers
 			});
 
 			engine.on('torrent', torrent => {
 				engine.destroy();
 				if (this.attt && this.trackers.length > 0) {
-					torrent.announce = [];
-					torrent.announceList = [
-						[].concat(this.trackers)
-					];
+					torrent.announce = [].concat(this.trackers);
 				}
 				resolve(ParseTorrent.toTorrentFile(torrent));
 			});

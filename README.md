@@ -18,7 +18,6 @@ Optional options are:
 {
     trackers = [],                  // {Array<string>} trackers to use, default is []
     addTrackersToTorrent = false,   // {boolean} default is false
-    port = 6881                     // {number} default is 6881
 }
 ```
 
