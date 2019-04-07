@@ -1,6 +1,6 @@
 {
   "name": "magnet2torrent-js",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Convert magnet to torrent (independent of third-party services)",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,12 @@
   "author": "Jindai Kirin",
   "license": "MIT",
   "dependencies": {
+    "bncode": "^0.5.2",
+    "buffer-from": "^1.0.0",
+    "hat": "0.0.3",
     "parse-torrent": "^6.1.2",
-    "torrent-stream": "file:./mod/torrent-stream"
+    "peer-wire-swarm": "^0.12.0",
+    "torrent-discovery": "^5.2.0",
+    "torrent-piece": "^1.0.0"
   }
 }

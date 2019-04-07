@@ -1,4 +1,4 @@
-const TorrentStream = require('torrent-stream');
+const TorrentStream = require('./mod/torrent-stream');
 const ParseTorrent = require('parse-torrent');
 
 /**
