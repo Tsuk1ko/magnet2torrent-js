@@ -16,8 +16,9 @@ Optional options are:
 
 ```javascript
 {
-    trackers = [],                  // {Array<string>} trackers to use, default is []
-    addTrackersToTorrent = false,   // {boolean} default is false
+    trackers = [],                  // {Array<string>} Trackers to use, default is []
+    addTrackersToTorrent = false,   // {boolean} Default is false
+    timeout = 60                    // {number} Timeout seconds, set to 0 will disable, default is 0
 }
 ```
 
@@ -35,12 +36,16 @@ const Fs = require('fs');
 const Magnet2torrent = require('magnet2torrent-js');
 
 // ubuntu-16.04.1-server-amd64.iso
-const magnet = 'magnet:?xt=urn:btih:90289fd34dfc1cf8f316a268add8354c85334458';
+let magnet = 'magnet:?xt=urn:btih:90289fd34dfc1cf8f316a268add8354c85334458';
 
-let m2t = new Magnet2torrent();
+let m2t = new Magnet2torrent({
+    timeout: 60
+});
 
 m2t.getTorrentBuffer(magnet).then(buffer => {
     Fs.writeFileSync('test.torrent', buffer);
+}).catch(e => {
+    console.error('Timeout or error occured');
 });
 ```
 
@@ -61,7 +66,7 @@ const trackers = [
 ];
 
 // ubuntu-16.04.1-server-amd64.iso
-const magnet = 'magnet:?xt=urn:btih:90289fd34dfc1cf8f316a268add8354c85334458';
+let magnet = 'magnet:?xt=urn:btih:90289fd34dfc1cf8f316a268add8354c85334458';
 
 let m2t = new Magnet2torrent({
     trackers,
