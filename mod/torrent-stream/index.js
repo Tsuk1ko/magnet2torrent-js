@@ -1,76 +1,72 @@
-var hat = require('hat');
-var pws = require('peer-wire-swarm');
-var bncode = require('bncode');
-var parseTorrent = require('parse-torrent');
-var events = require('events');
-var peerDiscovery = require('torrent-discovery');
-var bufferFrom = require('buffer-from');
-var exchangeMetadata = require('./lib/exchange-metadata');
+const hat = require('hat');
+const pws = require('peer-wire-swarm');
+const bncode = require('bncode');
+const parseTorrent = require('parse-torrent');
+const events = require('events');
+const PeerDiscovery = require('torrent-discovery');
+const bufferFrom = require('buffer-from');
+const exchangeMetadata = require('./lib/exchange-metadata');
 
-var DEFAULT_PORT = 6881;
+const DEFAULT_PORT = 6881;
 
-var torrentStream = function (link, opts) {
+module.exports = (link, opts) => {
 	link = parseTorrent(link);
-	var infoHash = link.infoHash;
+	const infoHash = link.infoHash;
 
 	if (!opts) opts = {};
 	if (!opts.id) opts.id = '-TS0008-' + hat(48);
 	if (!opts.name) opts.name = 'torrent-stream';
 
-	var engine = new events.EventEmitter();
-	var swarm = pws(infoHash, opts.id, {
+	const engine = new events.EventEmitter();
+	const swarm = pws(infoHash, opts.id, {
 		size: opts.connections || 100,
-		speed: 10
+		speed: 10,
 	});
 
 	engine.infoHash = infoHash;
 	engine.amInterested = false;
 	engine.swarm = swarm;
 
-	var discovery = peerDiscovery({
+	const discovery = new PeerDiscovery({
 		peerId: bufferFrom(opts.id),
-		dht: (opts.dht !== undefined) ? opts.dht : true,
-		tracker: (opts.tracker !== undefined) ? opts.tracker : true,
+		infoHash,
+		dht: opts.dht !== undefined ? opts.dht : true,
+		tracker: opts.tracker !== undefined ? opts.tracker : true,
 		port: DEFAULT_PORT,
-		announce: opts.trackers
+		announce: opts.trackers,
 	});
 
-	discovery.on('peer', function (addr) {
+	discovery.on('peer', addr => {
 		engine.connect(addr);
 	});
 
-	var ontorrent = function (torrent) {
+	const ontorrent = torrent => {
 		engine.emit('torrent', torrent);
 	};
 
-	var exchange = exchangeMetadata(engine, function (metadata) {
-		var buf = bncode.encode({
-			info: bncode.decode(metadata)
+	const exchange = exchangeMetadata(engine, metadata => {
+		const buf = bncode.encode({
+			info: bncode.decode(metadata),
 		});
-
 		ontorrent(parseTorrent(buf));
 	});
 
-	swarm.on('wire', function (wire) {
+	swarm.on('wire', wire => {
 		exchange(wire);
 	});
 
-	discovery.setTorrent(link);
-
-	engine.connect = function (addr) {
+	engine.connect = addr => {
 		swarm.add(addr);
 	};
 
-	engine.disconnect = function (addr) {
+	engine.disconnect = addr => {
 		swarm.remove(addr);
 	};
 
-	engine.destroy = function () {
+	engine.destroy = () => {
 		swarm.destroy();
-		discovery.stop();
+		discovery.destroy();
 	};
 
 	return engine;
 };
-
-module.exports = torrentStream;
