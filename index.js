@@ -13,23 +13,16 @@ class Magnet2torrent {
 	 * @memberof Magnet2torrent
 	 */
 	constructor(options = {}) {
-		let {
-			trackers,
-			addTrackersToTorrent,
-			timeout
-		} = options;
+		const { trackers, addTrackersToTorrent, timeout } = options;
 
 		this.trackers = trackers || [];
 		this.attt = addTrackersToTorrent ? true : false;
-		this.timeout = (timeout && timeout > 0) ? timeout : 0;
+		this.timeout = timeout && timeout > 0 ? timeout : 0;
 
-		if (!Array.isArray(this.trackers))
-			throw new TypeError('announceList must be an array');
-		for (let tracker of this.trackers) {
-			if (typeof tracker != 'string')
-				throw new TypeError('member of announceList must be string');
+		if (!Array.isArray(this.trackers)) throw new TypeError('announceList must be an array');
+		for (const tracker of this.trackers) {
+			if (typeof tracker != 'string') throw new TypeError('member of announceList must be string');
 		}
-
 	}
 
 	/**
@@ -41,16 +34,15 @@ class Magnet2torrent {
 	 */
 	getTorrentBuffer(magnet) {
 		return new Promise((resolve, reject) => {
-			const engine = TorrentStream(magnet, {
-				trackers: this.trackers
-			});
+			const engine = TorrentStream(magnet, { trackers: this.trackers });
 
 			let to;
 
-			if (this.timeout > 0) to = setTimeout(() => {
-				engine.destroy();
-				reject('Timeout');
-			}, this.timeout * 1000);
+			if (this.timeout > 0)
+				to = setTimeout(() => {
+					engine.destroy();
+					reject('Timeout');
+				}, this.timeout * 1000);
 
 			engine.on('torrent', torrent => {
 				if (to) clearTimeout(to);

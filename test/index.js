@@ -1,5 +1,6 @@
 const Fs = require('fs');
-const Magnet2torrent = require('.');
+const Path = require('path');
+const Magnet2torrent = require('..');
 
 // https://github.com/ngosang/trackerslist
 const trackers = [
@@ -22,17 +23,17 @@ const trackers = [
 	'udp://ipv4.tracker.harry.lu:80/announce',
 	'http://vps02.net.orel.ru:80/announce',
 	'udp://retracker.netbynet.ru:2710/announce',
-	'udp://bt.xxx-tracker.com:2710/announce'
+	'udp://bt.xxx-tracker.com:2710/announce',
 ];
 
 // ubuntu-16.04.1-server-amd64.iso
 const magnet = 'magnet:?xt=urn:btih:90289fd34dfc1cf8f316a268add8354c85334458';
 
-let m2t = new Magnet2torrent({
+const m2t = new Magnet2torrent({
 	trackers,
-	addTrackersToTorrent: true
+	addTrackersToTorrent: true,
 });
 
 m2t.getTorrentBuffer(magnet).then(buffer => {
-	Fs.writeFileSync('test.torrent', buffer);
+	Fs.writeFileSync(Path.resolve(__dirname, 'test.torrent'), buffer);
 });

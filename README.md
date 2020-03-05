@@ -36,9 +36,9 @@ const Fs = require('fs');
 const Magnet2torrent = require('magnet2torrent-js');
 
 // ubuntu-16.04.1-server-amd64.iso
-let magnet = 'magnet:?xt=urn:btih:90289fd34dfc1cf8f316a268add8354c85334458';
+const magnet = 'magnet:?xt=urn:btih:90289fd34dfc1cf8f316a268add8354c85334458';
 
-let m2t = new Magnet2torrent({
+const m2t = new Magnet2torrent({
     timeout: 60
 });
 
