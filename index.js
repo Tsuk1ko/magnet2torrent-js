@@ -1,20 +1,7 @@
 const TorrentStream = require('./mod/torrent-stream');
-const ParseTorrent = require('parse-torrent');
 
-/**
- * Convert magnet to torrent buffer
- *
- * @class Magnet2torrent
- */
 class Magnet2torrent {
-	/**
-	 * Creates an instance of Magnet2torrent.
-	 * @param {*} [options={}] Options
-	 * @memberof Magnet2torrent
-	 */
-	constructor(options = {}) {
-		const { trackers, addTrackersToTorrent, timeout } = options;
-
+	constructor({ trackers, addTrackersToTorrent, timeout } = {}) {
 		this.trackers = trackers || [];
 		this.attt = addTrackersToTorrent ? true : false;
 		this.timeout = timeout && timeout > 0 ? timeout : 0;
@@ -25,14 +12,7 @@ class Magnet2torrent {
 		}
 	}
 
-	/**
-	 * Convert magnet to torrent buffer
-	 *
-	 * @param {string} magnet Magnet link
-	 * @returns
-	 * @memberof Magnet2torrent
-	 */
-	getTorrentBuffer(magnet) {
+	getTorrent(magnet) {
 		return new Promise((resolve, reject) => {
 			const engine = TorrentStream(magnet, { trackers: this.trackers });
 
@@ -50,9 +30,13 @@ class Magnet2torrent {
 				if (this.attt && this.trackers.length > 0) {
 					torrent.announce = [].concat(this.trackers);
 				}
-				resolve(ParseTorrent.toTorrentFile(torrent));
+				resolve(torrent);
 			});
 		});
+	}
+
+	getTorrentBuffer(magnet) {
+		return this.getTorrent(magnet).then(torrent => torrent.toTorrentFile());
 	}
 }
 
