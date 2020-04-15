@@ -41,9 +41,9 @@ bittorrent-peerid@^1.0.2:
   integrity sha512-3xPhNfklf4xzxFVw9Y7W5dnGNhubVF0r8BK3imIsB6E3aDA4d6WhsceK1Yusos0TiiB9QZrdCsVXVqs26sFMxw==
 
 bittorrent-tracker@^9.0.0:
-  version "9.14.4"
-  resolved "https://registry.yarnpkg.com/bittorrent-tracker/-/bittorrent-tracker-9.14.4.tgz#0d9661560e6fec37689dfc5045142772eac05536"
-  integrity sha512-2Y/MNRjYhysD6t4r38z7l1WTT7g23IAqRWZRsj7xnnpciFn4xE4qiKmyFwA4gtbFGAZ14K3DdaqZbiQsC3PEfQ==
+  version "9.14.5"
+  resolved "https://registry.yarnpkg.com/bittorrent-tracker/-/bittorrent-tracker-9.14.5.tgz#aa5573ba91c003581cb337c2889226137f65f32a"
+  integrity sha512-Y1ng5r2qGCgDldjd9eYL8Mv1DjCo6eljqC+T6IMcwmYx0h20KNPKTxJkyNT5gaeJkAhM+p+jmhlV7/ty535Txg==
   dependencies:
     bencode "^2.0.0"
     bittorrent-peerid "^1.0.2"
@@ -63,7 +63,6 @@ bittorrent-tracker@^9.0.0:
     simple-peer "^9.0.0"
     simple-websocket "^8.0.0"
     string2compact "^1.1.1"
-    uniq "^1.0.1"
     unordered-array-remove "^1.0.2"
     ws "^7.0.0"
   optionalDependencies:
@@ -264,7 +263,7 @@ mimic-response@^2.0.0:
   resolved "https://registry.yarnpkg.com/mimic-response/-/mimic-response-2.1.0.tgz#d13763d35f613d09ec37ebb30bac0469c0ee8f43"
   integrity sha512-wXqjST+SLt7R009ySCglWBCFpjUygmCIfD790/kVbiGmUgfYGuB14PiTd5DwVxSV4NcYHjzMkoj5LjQZwTQLEA==
 
-minimist@^1.1.1, minimist@^1.2.5:
+minimist@^1.1.1:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
@@ -286,10 +285,10 @@ once@^1.1.1, once@^1.3.0, once@^1.3.1:
   dependencies:
     wrappy "1"
 
-parse-torrent@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/parse-torrent/-/parse-torrent-7.0.1.tgz#669c51a95363550055c7de0957741d6a05575daf"
-  integrity sha512-FdF1kBImRLt+ICV4NTz8L+sI2hFlPXAq1tXuw21gKz8EuThyVUFJ/wPfBEyYQrvnBpmGf7cM/LVSOhMRe8MrKw==
+parse-torrent@^7.1.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/parse-torrent/-/parse-torrent-7.1.2.tgz#4ecde4b3be2729ba2b6f336040910d6fe4649d19"
+  integrity sha512-1boHRA+aV7aeZBIg0rMBYhtfizAd/BXCXOCh/klYrgVnSpUAuJUIzQrIGkCsb93U1KOVN6C3NZOgpNy8htmqgw==
   dependencies:
     bencode "^2.0.0"
     blob-to-buffer "^1.2.6"
@@ -297,7 +296,6 @@ parse-torrent@^7.0.1:
     magnet-uri "^5.1.3"
     simple-get "^3.0.1"
     simple-sha1 "^3.0.0"
-    uniq "^1.0.1"
 
 peer-wire-protocol@^0.7.0:
   version "0.7.1"
@@ -502,7 +500,7 @@ wrappy@1:
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
 
-ws@^7.0.0, ws@^7.2.3:
+ws@^7.0.0:
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.2.3.tgz#a5411e1fb04d5ed0efee76d26d5c46d830c39b46"
   integrity sha512-HTDl9G9hbkNDk98naoR/cHDws7+EyYMOdL1BmjsZXRUjf7d+MficC4B7HLUPlSiho0vg+CWKrGIt/VJBd1xunQ==
